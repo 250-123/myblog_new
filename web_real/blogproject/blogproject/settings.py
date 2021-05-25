@@ -25,7 +25,7 @@ SECRET_KEY = 'mx)&#vhb*7mmmrji13ia8=#s_3czwk#m3=q(*pu5h@@!pbz1lg'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost ', 'shiwenyusfathers.com','139.196.124.187']
 
 
 # Application definition
@@ -147,5 +147,4 @@ AUTHENTICATION_BACKENDS = (
 #图片设置
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(os.path.join(BASE_DIR, 'templates'), 'media')
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost ', 'shiwenyusfathers.com','139.196.124.187']
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
