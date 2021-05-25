@@ -148,3 +148,4 @@ AUTHENTICATION_BACKENDS = (
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(os.path.join(BASE_DIR, 'templates'), 'media')
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost ', 'shiwenyusfathers.com']
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
