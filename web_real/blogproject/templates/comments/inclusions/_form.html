@@ -1,0 +1,10 @@
+<form action="{% url 'comments:comment' post.pk %}" method="post" class="comment-form">
+  {% csrf_token %}
+
+      <label for="{{ form.text.id_for_label }}">{{ form.text.label }}：</label>
+      {{ form.text }}
+      {{ form.text.errors }}
+    <p></p>
+      <button type="submit" class="comment-btn">发表</button>
+  <!-- row -->
+</form>

@@ -1,0 +1,138 @@
+<!DOCTYPE HTML>
+{%load static%}
+{% load blog_extras %}
+<html>
+	<head>
+
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+		<link rel="stylesheet" href="https://unpkg.com/multiple-select@1.5.2/dist/multiple-select.min.css">
+		<link rel="stylesheet" type="text/css" href="{% static 'assets/css/default.css' %}">
+		<style type="text/css"> 
+			*{
+			   margin: 0px;
+			   padding: 0px; 
+		   }
+		   body{
+			   background-color: #ffffff;
+		   }
+			 </style> 
+
+	</head>
+
+	<body class="is-preload"  >
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+
+
+							<!-- Content -->
+
+
+									{% block main %}
+									{% endblock main %}
+
+
+
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+							<!-- Search -->
+								<section>
+									<h1><a href="{% url 'blog:index' %}"><b>Blog</b> &amp; ShU</a></h1>
+									 <ul class="nav navbar-nav navbar-right">
+										 {% if user.is_authenticated %}
+										 <div><font size="2" color="red">你已登录，欢迎你：{{ user.nickname }}</font></div>
+										  <img src="{{MEDIA_URL}}{{user.img}}" alt=""   width="150" height="150"/>
+										 <li class="cl-effect-11"><h4><a href="{{request.user.get_home_id_url}}" data-hover="个人主页">个人主页</a></h4></li>
+										 <li class="cl-effect-11"><h4><a href="{{request.user.new_post}}" data-hover="发表博客">发表文章</a></h4></li>
+										 <li class="cl-effect-11"><h4><a href="{% url 'users:user_change' %}" data-hover="修改个人信息">修改个人信息</a></h4></li>
+										 <li class="cl-effect-11"><h4><a href="{% url 'password_change' %}?next={{ request.path }}" data-hover="修改密码">修改密码</a></h4></li>
+										 <li class="cl-effect-11"><h4><a href="{% url 'logout' %}?next={{ request.path }}" data-hover="注销">注销</a></h4></li>
+
+										 {% else %}
+										<li class="cl-effect-11"><a href="{% url 'login' %}?next={{ request.path }}" data-hover="登陆">登陆</a></li>
+										<li class="cl-effect-11"><a href="{% url 'users:register' %}?next={{ request.path }}" data-hover="注册">注册</a></li>
+										<img src="{% static 'blog/imges/tx.jpg' %}" alt=""  width="150" height="150"/>
+										 {% endif %}
+									 </ul>
+								</section>
+                            <!-- Search -->
+							<section id="search" >
+
+								<form role="search" method="get" id="searchform"  action="{% url 'blog:search' %}">
+
+									<input type="search" name="search" id="search_form" placeholder="搜索" />
+
+								</form>
+
+							</section>
+							<!-- Menu -->
+								<nav id="menu">
+									<header class="major">
+										<h2>筛选</h2>
+									</header>
+									<ul>
+
+										<li>
+											<span class="opener">Recent Posts</span>
+												{% show_recent_posts %}
+										</li>
+										<li>
+											<span class="opener">archives</span>
+												{% show_archives %}
+										</li>
+										<li>
+											<span class="opener">categories</span>
+												{% show_categories %}
+										</li>
+										<li>
+											<span class="opener">tags</span>
+												{% show_tags %}
+										</li>
+
+									</ul>
+								</nav>
+
+
+
+
+
+							<!-- Footer -->
+								<footer id="footer">
+									<div class="copyright">祝仕昊 18123172 </div><div class="copyright">古倬铭 18122268</div><div class="copyright">邓松 18122171</div>
+								</footer>
+
+						</div>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+			
+			<script src="{% static 'assets/js/test-clear.js' %}"></script>
+			<script src="{% static 'assets/js/browser.min.js' %}"></script>
+
+			<script src="{% static 'assets/js/breakpoints.min.js' %}"></script>
+			<script src="{% static 'assets/js/util.js' %}"></script>
+			<script src="{% static 'assets/js/main.js' %}"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+            <script src="https://unpkg.com/multiple-select@1.5.2/dist/multiple-select.min.js"></script>
+<script>
+    $(function () {
+        $('select').multipleSelect()
+    })
+</script>
+	</body>
+</html>

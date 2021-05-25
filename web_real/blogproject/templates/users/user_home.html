@@ -1,0 +1,190 @@
+<!DOCTYPE HTML>
+{% extends 'base111.html' %}
+{%load static%}
+<html>
+	<head>
+		{% load staticfiles %}
+		<title>{{ user.username }}的个人博客</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+                  {% block main %}
+				<!-- Main -->
+				<title>{{home_user.nickname}}的博客</title>
+					<div id="main">
+
+
+
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+										<h1><p></p></h1>
+										<h1>{{ home_user.nickname }}的主页</h1>
+
+									</header>
+
+									<span class="image main"><img src="images/pic11.jpg" alt="" /></span>
+									{% for post in post_list %}
+									<hr class="post post-{{ post.pk }}">
+
+									<h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
+									<div class="entry-meta">
+										<span class="post-author"><h5><a href="{{post.author.get_home_id_url}}">作者：{{ post.author.nickname }}</a></h5></span>
+										<font size="1">
+											<span class="post-category">{{ post.category.name }}</span>
+											<span class="post-date"><time class="entry-date"
+																		  datetime="{{ post.created_time }}">{{ post.created_time }}</time></span>
+											<span class="comments-link">{{ post.comment_set.count }}评论</span>
+
+										</font>
+										<p></p>
+									</div>
+									<blockquote><p>{{ post.excerpt }}</p></blockquote>
+									<div class="read-more cl-effect-14">
+                                        {% if user.id == home_user.id %}
+										<h4><a href="{{ post.get_absolute_url }}" class="more-link">查看<span class="meta-nav"></span></a>
+											<span>||</span>
+                                        <a href="{{ post.get_absolute_url_for_userchange }}" class="more-link">修改<span class="meta-nav"></span></a>
+											<span>||</span>
+										<a href="{{ post.get_absolute_url_for_delete }}" class="more-link">删除<span class="meta-nav"></span></a></h4>
+                                        {% else %}
+										<h4><a href="{{ post.get_absolute_url }}" class="more-link">查看<span class="meta-nav"></span></a></h4>
+										{% endif %}
+									</div>
+									{% empty %}
+									<div class="no-post">暂时还没有发布的文章！</div>
+
+
+									{% endfor %}
+								</section>
+
+						<div align="center">
+						<div class="pagination-simple">
+							<h4>
+                    <!-- 如果当前页还有上一页，显示一个上一页的按钮 -->
+
+                    {% if post_list.has_previous %}
+                    <a href="?page=1">首页</a>
+                    <a href="?page={{ post_list.previous_page_number }}">上一页</a>
+                    {% endif %}
+                    <!-- 显示当前页面信息 -->
+                    <span class="current">第 {{ post_list.number }} 页 / 共 {{ post_list.paginator.num_pages }} 页</span>
+                    <!-- 如果当前页还有下一页，显示一个下一页的按钮 -->
+                    {% if post_list.has_next %}
+                    <a href="?page={{ post_list.next_page_number }}">下一页</a>
+                    <a href="?page={{ post_list.paginator.num_pages }}">尾页</a>
+                    {% endif %}
+							<p></p><p></p>
+								</h4>
+                </div>
+						</div>
+					</div>
+
+
+
+				{% endblock main %}
+				<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+
+
+
+
+							<!-- Menu -->
+								<nav id="menu">
+									<header class="major">
+										<h2>个人管理</h2>
+									</header>
+									<ul>
+										<li><a href="index.html">账户信息</a></li>
+										<li><a href="{{user.get_home_id_url}}">我的博客</a></li>
+										<li><a href="elements.html">Elements</a></li>
+										<li>
+											<span class="opener">Submenu</span>
+											<ul>
+												<li><a href="#">Lorem Dolor</a></li>
+												<li><a href="#">Ipsum Adipiscing</a></li>
+												<li><a href="#">Tempus Magna</a></li>
+												<li><a href="#">Feugiat Veroeros</a></li>
+											</ul>
+										</li>
+										<li><a href="#">Etiam Dolore</a></li>
+										<li><a href="#">Adipiscing</a></li>
+										<li>
+											<span class="opener">Another Submenu</span>
+											<ul>
+												<li><a href="#">Lorem Dolor</a></li>
+												<li><a href="#">Ipsum Adipiscing</a></li>
+												<li><a href="#">Tempus Magna</a></li>
+												<li><a href="#">Feugiat Veroeros</a></li>
+											</ul>
+										</li>
+										<li><a href="#">Maximus Erat</a></li>
+										<li><a href="#">Sapien Mauris</a></li>
+										<li><a href="#">Amet Lacinia</a></li>
+									</ul>
+								</nav>
+
+							<!-- Section -->
+								<section>
+									<header class="major">
+										<h2>Ante interdum</h2>
+									</header>
+									<div class="mini-posts">
+										<article>
+											<a href="#" class="image"><img src="images/pic07.jpg" alt="" /></a>
+											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
+										</article>
+										<article>
+											<a href="#" class="image"><img src="images/pic08.jpg" alt="" /></a>
+											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
+										</article>
+										<article>
+											<a href="#" class="image"><img src="images/pic09.jpg" alt="" /></a>
+											<p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
+										</article>
+									</div>
+									<ul class="actions">
+										<li><a href="#" class="button">More</a></li>
+									</ul>
+								</section>
+
+							<!-- Section -->
+								<section>
+									<header class="major">
+										<h2>Get in touch</h2>
+									</header>
+									<p>Sed varius enim lorem ullamcorper dolore aliquam aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin sed aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>
+									<ul class="contact">
+										<li class="icon solid fa-envelope"><a href="#">information@untitled.tld</a></li>
+										<li class="icon solid fa-phone">(000) 000-0000</li>
+										<li class="icon solid fa-home">1234 Somewhere Road #8254<br />
+										Nashville, TN 00000-0000</li>
+									</ul>
+								</section>
+
+							<!-- Footer -->
+								<footer id="footer">
+									<p class="copyright">&copy; Untitled. All rights reserved. Demo Images: <a href="https://unsplash.com">Unsplash</a>. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+								</footer>
+
+						</div>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+			<script src="{% static 'assets/js/browser.min.js' %}"></script>
+			<script src="{% static 'assets/js/breakpoints.min.js' %}"></script>
+			<script src="{% static 'assets/js/util.js' %}"></script>
+			<script src="{% static 'assets/js/main.js' %}"></script>
+
+	</body>
+</html>

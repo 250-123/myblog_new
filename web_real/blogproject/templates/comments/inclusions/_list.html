@@ -1,0 +1,41 @@
+<h3>评论列表，共 <span>{{ comment_count }}</span> 条评论</h3>
+<ul class="comment-list list-unstyled">
+  {% for comment in comment_list %}
+
+    <div class="comment-item">
+      <div>  <img src="/media/{{comment.user.img}}" alt=""   width="50" height="50"/> </div>
+
+        <span class="nickname"><h6><a href="{{comment.user.get_home_id_url}}">{{ comment.user.nickname }}</a></h6></span>
+
+        <font size="1"><time class="submit-date" datetime="{{ comment.created_time }}">{{ comment.created_time }}</time></font>
+
+      <div class="box">
+
+        {{ comment.text|linebreaks }}
+      </div>
+
+    </div>
+
+
+  {% empty %}
+    暂无评论
+  {% endfor %}
+    <div align="center">
+    <div class="pagination-simple">
+        <h4>
+                    <!-- 如果当前页还有上一页，显示一个上一页的按钮 -->
+                    {% if comment_list.has_previous %}
+                    <a href="?page=1">首页</a>
+                    <a href="?page={{ comment_list.previous_page_number }}">上一页</a>
+                    {% endif %}
+                    <!-- 显示当前页面信息 -->
+                    <span class="current">第 {{ comment_list.number }} 页 / 共 {{ comment_list.paginator.num_pages }} 页评论</span>
+                    <!-- 如果当前页还有下一页，显示一个下一页的按钮 -->
+                    {% if comment_list.has_next %}
+                    <a href="?page={{ comment_list.next_page_number }}">下一页</a>
+                    <a href="?page={{ comment_list.paginator.num_pages }}">尾页</a>
+                    {% endif %}
+            </h4>
+                </div>
+    </div>
+</ul>
