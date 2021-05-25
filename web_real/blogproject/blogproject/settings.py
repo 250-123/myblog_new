@@ -147,5 +147,5 @@ AUTHENTICATION_BACKENDS = (
 #图片设置
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(os.path.join(BASE_DIR, 'templates'), 'media')
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost ', 'shiwenyusfathers.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost ', 'shiwenyusfathers.com','139.196.124.187']
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
